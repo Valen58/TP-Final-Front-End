@@ -27,18 +27,8 @@ function CounterProvider({ children }) {
       wordsList.push(wordFormed)
     }
 
-    
 
-    //este ciclo es medio impractico, se podria optimizar para evitar lo de los espacios contados como palabra dentro del primer for supongo
-    //en el caso que el profe pida que las palabras tienen que tener > 1 caracter, es simplemente poner otra condicion en el if que diga wordslist[i].length > 1
-    //let tempWordList = []
-    // for (let i = 0; i < wordsList.length; i++){
-    //   if (wordsList[i] !== ''){
-    //     tempWordList.push(wordsList[i])
-    //   }
-    // }
-
-   let newWordsList = wordsList.filter((w) => w !== '') // esta forma es mejor pero no quiero borrar la anterior por las dudas (todos estos comentarios borralos en la entrega final)
+   let newWordsList = wordsList.filter((w) => w !== '') 
 
     setWordList(newWordsList)
   }
@@ -70,37 +60,64 @@ function CounterProvider({ children }) {
   }
 
 //-----------------------------------------------------------------------------------------------------------------------------------
-// por las dudas no toques esta parte hasta el martes y pregunta si realmente hace falta ponerle tantas restricciones a los contadores de caracteres, palabras y oraciones 
-// (refiriendome a lo de que una palabra no es un conjunto de espacios vacios y una oracion no es simplemente un conjunto de espacios vacios con un punto al final) 
-// porque tengo mis dudas si eso se encarga el exclude spaces o simplemente lo que hace es reducir el contador restandole los espacios
-// intermedios que hay en el texto que se escribe en el textarea 
+
 
   const [excludeSpaces, setExcludeSpaces] = useState(false)
   const [noSpaces, setNoSpaces] = useState("")
+  const [checkCharLimit, setCheckCharLimit] = useState(false)
+  const [charLimit, setCharLimit] = useState(0)
+  const [inputLimit, setInputLimit] = useState(100)
+  
 
-  function deleteSpaces(text){
-    let textWithoutSpaces = ""
-    for (const letter of text){
-      if (letter !== ' '){
-        textWithoutSpaces = textWithoutSpaces + letter
+  function countWithoutSpaces(text){
+    let trimmedText = text.trim()
+    let noSpacesText = ""
+    for (const char of text){
+      if (char !== ' '){
+        noSpacesText = noSpacesText + char
       }
     }
-    return textWithoutSpaces;
+    setNoSpaces(noSpacesText)
   }
 
-  function exSpaces(text){
-    if (excludeSpaces){
-      setNoSpaces(deleteSpaces(text))
-    }
+
+
+  //ARREGLALO NO SE POR QUE TIRA ERROR ESTOY RE QUEMADO
+  function showCharSet(text){
+    return (
+      <>
+        <input type="number" defaultValue = {inputLimit} 
+        onChange={(e) => setInputLimit(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter"){
+            setCharLimit(inputLimit)
+            console.log(charLimit)
+          }
+        }}
+        />        
+        <button onClick={applyCharLimit}>
+        Set
+        </button> 
+      </>
+    )
   }
+
+  function applyCharLimit(text) {
+    const limitedText = text.slice(0, Number(inputLimit));
+
+    setCharLimit(Number(inputLimit));
+    setText(limitedText);
+}
 
 //-----------------------------------------------------------------------------------------------------------------------------------
 
   return (
-    <CounterContext.Provider value={{ text, setText, wordCounter, wordList, setWordList, sentenceCounter, sentenceList, setSentenceList, excludeSpaces, setExcludeSpaces }}>
+    <CounterContext.Provider value={{ text, setText, wordCounter, wordList, setWordList, sentenceCounter, sentenceList, setSentenceList, excludeSpaces, setExcludeSpaces, countWithoutSpaces, excludeSpaces, noSpaces, checkCharLimit, setCheckCharLimit, showCharSet, charLimit, setCharLimit, applyCharLimit }}>
       {children}
     </CounterContext.Provider>
   );
 }
 
 export { CounterContext, CounterProvider }
+
+
