@@ -15,7 +15,6 @@ function App() {
                 <>
                     <CounterHeader/>
                     <TextArea/>
-                    <h2>Letter Density</h2>
                 </>
             </CounterProvider>
         </DensityProvider>

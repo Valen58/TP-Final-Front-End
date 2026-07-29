@@ -1,32 +1,30 @@
-import { createContext, useState } from "react"
+import { createContext, useContext, useState } from "react"
 
 const DensityContext = createContext()
 
 function DensityProvider({ children }) {
-    const [lettersUsed, setLettersUsed] = useState([])
+    
 
 
-    //HACE EL CONTADOR PARA QUE SALGA EL PORCENTAJE DE APARICION DE CADA LETRA EN EL TEXTO, QUIZAS PODRIAS EN VEZ DE PASAR SOLO UN STRING PASES UN OBJETO CON LA LETRA Y LA CANTIDAD DE VECES QUE APARECE
-    function showLetters(text){
-      let lowerText = text.toLowerCase()
-      let letterList = []
-      const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z'];
+  function countOnlyLetters(text){
+    const alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','ñ','o','p','q','r','s','t','u','v','w','x','y','z']
 
-      for (const letter of lowerText){
-        if (!letterList.includes(letter) && alphabet.includes(letter)){ 
-          letterList.push(letter)
-        }
+    let onlyLettersText = ""
+
+    for (const letter of text.toLowerCase()){
+      if (alphabet.includes(letter)){
+        onlyLettersText += letter
       }
-
-      setLettersUsed(letterList)
-
     }
+
+    return onlyLettersText
+  }
 
 
     
 
     return (
-    <DensityContext.Provider value={{ lettersUsed, setLettersUsed, showLetters }}>
+    <DensityContext.Provider value={{ countOnlyLetters }}>
       {children}
     </DensityContext.Provider>
   );
