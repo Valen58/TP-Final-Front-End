@@ -1,4 +1,5 @@
-import { createContext, useState } from "react"
+import { createContext, useContext, useState } from "react"
+import { DensityContext } from "./DensityContext"
 
 const CounterContext = createContext()
 
@@ -6,6 +7,7 @@ function CounterProvider({ children }) {
   const [text, setText] = useState("")
   const [wordList, setWordList] = useState([])
   const [sentenceList, setSentenceList] = useState([])
+  const {showLetters} = useContext(DensityContext)
 
 
   function wordCounter(text){
@@ -82,7 +84,6 @@ function CounterProvider({ children }) {
 
 
 
-  //ARREGLALO NO SE POR QUE TIRA ERROR ESTOY RE QUEMADO
   function showCharSet(text){
     return (
       <>
@@ -91,7 +92,7 @@ function CounterProvider({ children }) {
         onKeyDown={(e) => {
           if (e.key === "Enter"){
             setCharLimit(inputLimit)
-            console.log(charLimit)
+            applyCharLimit()
           }
         }}
         />        
@@ -102,11 +103,12 @@ function CounterProvider({ children }) {
     )
   }
 
-  function applyCharLimit(text) {
-    const limitedText = text.slice(0, Number(inputLimit));
+  function applyCharLimit() {
+    const limitedText = text.slice(0, Number(inputLimit))
 
-    setCharLimit(Number(inputLimit));
-    setText(limitedText);
+    setCharLimit(Number(inputLimit))
+    setText(limitedText)
+    showLetters(limitedText)
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------

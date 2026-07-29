@@ -12,13 +12,13 @@ function TextArea(){
             <textarea name="" id="" className="text-area" value={text} onChange={(event) => {
                 let newText = event.target.value
                 if (checkCharLimit) {
-                    newText = newText.slice(0, charLimit);
+                    newText = newText.slice(0, charLimit)
                 }
-                setText(newText);
-                wordCounter(newText);
-                sentenceCounter(newText);
-                showLetters(newText);
-                countWithoutSpaces(newText);
+                setText(newText)
+                wordCounter(newText)
+                sentenceCounter(newText)
+                showLetters(newText)
+                countWithoutSpaces(newText)
 
             }}></textarea>
             
