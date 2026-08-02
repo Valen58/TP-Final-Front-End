@@ -5,7 +5,7 @@ import { LetterDensity } from "./LetterDensity"
 
 function TextArea(){
     const {text, setText, wordCounter, wordList, sentenceList, sentenceCounter, excludeSpaces, setExcludeSpaces, showLetters, countWithoutSpaces, noSpaces, checkCharLimit, setCheckCharLimit, showCharSet, charLimit, applyCharLimit} = useContext(CounterContext)
-    let readingTime = Math.ceil(wordList.length / 200) //OJO NO SE SI ES LA FORMA QUE PIDIO EL PROFE MAÑANA PREGUNTALE WACHIN
+    let readingTime = Math.ceil(wordList.length / 200)
     return(
         <>
             <textarea name="" id="" className="text-area" value={text} onChange={(event) => {
@@ -22,28 +22,49 @@ function TextArea(){
 
             }}></textarea>
             
-            <p>Aprox. reading time: {readingTime < 1 ? "<1" : readingTime} {" "} {readingTime === 1 ? "minute" : "minutes"}</p>
+            <div className="checkbox-area">
+        
+                <input type="checkbox" 
+                checked={excludeSpaces}
+                className="checkbox" 
+                onChange={(event) => setExcludeSpaces(event.target.checked)}/>
+                Exclude Spaces
 
-            <input type="checkbox" 
-            checked={excludeSpaces} 
-            onChange={(event) => setExcludeSpaces(event.target.checked)}/>
-            Exclude Spaces
+                <input type="checkbox"
+                checked = {checkCharLimit}
+                className="checkbox"
+                onChange={(event) => setCheckCharLimit(event.target.checked)}
+                />
+                Set Character Limit
+                {checkCharLimit ? showCharSet() : null}
 
-            <input type="checkbox"
-            checked = {checkCharLimit}
-            onChange={(event) => setCheckCharLimit(event.target.checked)}
-            />
-            Set Character Limit
-            {checkCharLimit ? showCharSet() : null}
+                <p>Aprox. reading time: {readingTime < 1 ? "<1" : readingTime} {" "} {readingTime === 1 ? "minute" : "minutes"}</p>
+
+            </div>
             
+            <div className="cards-area">
 
-            <p>Total Characters: {excludeSpaces ? noSpaces.length : text.length}</p>
-            <p>Word Count: {wordList.length}</p>
-            <p>Sentence Count: {sentenceList.length}</p>
+                <div>
+                    <h2>{excludeSpaces ? noSpaces.length : text.length}</h2>
+                    <p>Total Characters</p>
+                </div>
+                
+                <div>
+                    <h2>{wordList.length}</h2>
+                    <p>Word Count</p>
+                </div>
+                
+                <div>
+                    <h2>{sentenceList.length}</h2>
+                    <p>Sentence Count</p>
+                </div>
+            </div>
+            
+            <div className="letter-density-area">
+                <h2>Letter Density</h2>
 
-            <h2>Letter Density</h2>
-
-           <LetterDensity/>
+                <LetterDensity/>
+            </div>
         </>
     )
 }

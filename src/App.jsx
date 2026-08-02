@@ -13,8 +13,10 @@ function App() {
         <DensityProvider>
             <CounterProvider>
                 <>
+                <article>
                     <CounterHeader/>
                     <TextArea/>
+                </article>
                 </>
             </CounterProvider>
         </DensityProvider>

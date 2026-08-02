@@ -10,21 +10,23 @@ function LetterDensity(){
 
     return (
         <>
+        <div className="letter-density">
             <ul>
                 {lettersUsed.map((letter) => {
                     let percentage = onlyLetts.length > 0 ? (letter.apparitions / onlyLetts.length) * 100 : 0
 
                     return(
-                        <li key={letter.lett}>
-                            <span>{letter.lett.toUpperCase()}</span> 
+                        <li key={letter.lett} className="letter-row">
+                            <span className="letter">{letter.lett.toUpperCase()}</span> 
                             <progress value={percentage} max="100"></progress> 
-                            <span>
-                                {percentage.toFixed(1)}%
+                            <span className="value">
+                                {letter.apparitions} | {percentage.toFixed(1)}%
                             </span>
                         </li>
                     )
                 })}
             </ul>
+            </div>
         </>
     )
 }
