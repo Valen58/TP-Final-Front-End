@@ -16,10 +16,12 @@ body{
 
 article{
     margin-top: 25px;
-    height: 860px;
+    min-height: 860px;
+    height: auto;
     width: 660px;
     background-color: var(--background-color);
     text-align: center;
+    padding-bottom: 40px;
 }
 
 .header-logo {
@@ -48,36 +50,6 @@ article{
 .config-button img {
     width: 20px;
     height: 20px;
-}
-
-.letter-density {
-    max-height: 150px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.letter-density ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.letter-density::-webkit-scrollbar {
-    width: 8px;
-}
-
-.letter-density::-webkit-scrollbar-track {
-    background: #1C1F2A;
-    border-radius: 999px;
-}
-
-.letter-density::-webkit-scrollbar-thumb {
-    background: #6b7280;
-    border-radius: 999px;
-}
-
-.letter-density::-webkit-scrollbar-thumb:hover {
-    background: #D19BFF;
 }
 
 .character-header{
@@ -167,6 +139,74 @@ textarea{
     margin-right: 27px;
 }
 
+.char-limit-container{
+    margin-left: 165px;  
+    margin-top: 8px;
+
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.char-limit-container{
+    margin-left: 165px;
+    margin-top: 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.char-limit-container input{
+    width: 70px;
+    height: 34px;
+
+    background-color: var(--card-color);
+    color: var(--primary-text);
+
+    border: 2px solid #2A2D3A;
+    border-radius: 8px;
+
+    padding: 0 10px;
+    font-size: 14px;
+
+    outline: none;
+}
+
+.char-limit-container input:focus{
+    border-color: #D19BFF;
+}
+
+.char-limit-container input::-webkit-inner-spin-button,
+.char-limit-container input::-webkit-outer-spin-button{
+    appearance: none;
+    margin: 0;
+}
+
+.char-limit-container button{
+    height: 34px;
+    padding: 0 16px;
+
+    background-color: #D19BFF;
+    color: #12131A;
+
+    border: none;
+    border-radius: 8px;
+
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.char-limit-container button:hover{
+    background-color: #e0b7ff;
+}
+
+.char-limit-container button:active{
+    transform: scale(.97);
+}
+
 .cards-area{
     margin-top: 35px;
     display: flex;
@@ -249,6 +289,41 @@ textarea{
     text-align: left;
 }
 
+.letter-density {
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.letter-density.expanded {
+    max-height: none;
+    overflow-y: visible;
+}
+
+.letter-density ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.letter-density::-webkit-scrollbar {
+    width: 8px;
+}
+
+.letter-density::-webkit-scrollbar-track {
+    background: #1C1F2A;
+    border-radius: 999px;
+}
+
+.letter-density::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 999px;
+}
+
+.letter-density::-webkit-scrollbar-thumb:hover {
+    background: #D19BFF;
+}
+
 progress{
     flex: 1;
     height: 10px;
@@ -285,4 +360,29 @@ progress::-webkit-progress-value{
     align-items: center;
     gap: 12px;
     margin-bottom: 8px;
+}
+
+.see-more-button{
+    margin-top: 18px;
+    background: transparent;
+    border: none;
+
+    color: var(--secondary-text);
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    cursor: pointer;
+    transition: color .2s ease;
+}
+
+.see-more-button:hover{
+    color: var(--primary-text);
+}
+
+.see-more-button:active{
+    transform: scale(0.97);
 }

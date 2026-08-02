@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react"
 const DensityContext = createContext()
 
 function DensityProvider({ children }) {
-    
+  const [showAllLetters, setShowAllLetters] = useState(false)
 
 
   function countOnlyLetters(text){
@@ -24,7 +24,7 @@ function DensityProvider({ children }) {
     
 
     return (
-    <DensityContext.Provider value={{ countOnlyLetters }}>
+    <DensityContext.Provider value={{ countOnlyLetters, showAllLetters, setShowAllLetters }}>
       {children}
     </DensityContext.Provider>
   );

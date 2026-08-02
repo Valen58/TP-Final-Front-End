@@ -14,6 +14,7 @@ function CounterProvider({ children }) {
   const [lettersUsed, setLettersUsed] = useState([])
 
 
+
   function wordCounter(text){
     const newText = text.trim()
     let wordFormed = ""

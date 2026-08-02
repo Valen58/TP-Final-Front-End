@@ -3,14 +3,14 @@ import { DensityContext } from "../context/DensityContext"
 import { CounterContext } from "../context/CounterContext"
 
 function LetterDensity(){
-    const { countOnlyLetters } = useContext(DensityContext)
+    const { countOnlyLetters, showAllLetters, setShowAllLetters } = useContext(DensityContext)
     const { lettersUsed, noSpaces } = useContext(CounterContext)
 
     const onlyLetts = countOnlyLetters(noSpaces)
 
     return (
         <>
-        <div className="letter-density">
+        <div className={`letter-density ${showAllLetters ? "expanded" : ""}`}>
             <ul>
                 {lettersUsed.map((letter) => {
                     let percentage = onlyLetts.length > 0 ? (letter.apparitions / onlyLetts.length) * 100 : 0

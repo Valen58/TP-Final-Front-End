@@ -5,6 +5,7 @@ import { LetterDensity } from "./LetterDensity"
 
 function TextArea(){
     const {text, setText, wordCounter, wordList, sentenceList, sentenceCounter, excludeSpaces, setExcludeSpaces, showLetters, countWithoutSpaces, noSpaces, checkCharLimit, setCheckCharLimit, showCharSet, charLimit, applyCharLimit} = useContext(CounterContext)
+    const {showAllLetters, setShowAllLetters} = useContext(DensityContext)
     let readingTime = Math.ceil(wordList.length / 200)
     return(
         <>
@@ -22,25 +23,36 @@ function TextArea(){
 
             }}></textarea>
             
-            <div className="checkbox-area">
-        
-                <input type="checkbox" 
-                checked={excludeSpaces}
-                className="checkbox" 
-                onChange={(event) => setExcludeSpaces(event.target.checked)}/>
-                Exclude Spaces
+        <div className="checkbox-area">
 
-                <input type="checkbox"
-                checked = {checkCharLimit}
+            <input
+                type="checkbox"
+                checked={excludeSpaces}
+                className="checkbox"
+                onChange={(event) => setExcludeSpaces(event.target.checked)}
+            />
+            Exclude Spaces
+
+            <input
+                type="checkbox"
+                checked={checkCharLimit}
                 className="checkbox"
                 onChange={(event) => setCheckCharLimit(event.target.checked)}
-                />
-                Set Character Limit
-                {checkCharLimit ? showCharSet() : null}
+            />
+            Set Character Limit
 
-                <p>Aprox. reading time: {readingTime < 1 ? "<1" : readingTime} {" "} {readingTime === 1 ? "minute" : "minutes"}</p>
+            <p>
+                Aprox. reading time: {readingTime < 1 ? "<1" : readingTime}{" "}
+                {readingTime === 1 ? "minute" : "minutes"}
+            </p>
 
+        </div>
+
+        {checkCharLimit && (
+            <div className="char-limit-container">
+                {showCharSet()}
             </div>
+        )}
             
             <div className="cards-area">
 
@@ -64,7 +76,12 @@ function TextArea(){
                 <h2>Letter Density</h2>
 
                 <LetterDensity/>
+                
+            <button className="see-more-button" onClick={() => setShowAllLetters(!showAllLetters)}>
+                {showAllLetters ? "See less" : "See more"}
+            </button>
             </div>
+
         </>
     )
 }
