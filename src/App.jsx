@@ -1,25 +1,35 @@
-import { useState } from 'react'
+import { useContext } from 'react'
 import { CounterHeader } from './components/CounterHeader'
-import { CounterContext } from './context/CounterContext'
 import { CounterProvider } from './context/CounterContext'
-import { DensityContext } from './context/DensityContext'
 import { DensityProvider } from './context/DensityContext'
 import { TextArea } from './components/TextArea'
-import { LetterDensity } from './components/LetterDensity'
 import './App.css'
+import { ThemeProvider, ThemeContext } from "./context/ThemeContext"
+
+
+function AppContent(){
+
+    const {darkMode} = useContext(ThemeContext)
+
+    return(
+        <article className={darkMode ? "dark" : "light"}>
+            <CounterHeader/>
+            <TextArea/>
+        </article>
+    )
+}
+
 
 function App() {
+
     return(
-        <DensityProvider>
-            <CounterProvider>
-                <>
-                <article>
-                    <CounterHeader/>
-                    <TextArea/>
-                </article>
-                </>
-            </CounterProvider>
-        </DensityProvider>
+        <ThemeProvider>
+            <DensityProvider>
+                <CounterProvider>
+                    <AppContent/>
+                </CounterProvider>
+            </DensityProvider>
+        </ThemeProvider>
     )
 }
 

@@ -386,3 +386,19 @@ progress::-webkit-progress-value{
 .see-more-button:active{
     transform: scale(0.97);
 }
+
+
+.dark{
+    --background-color: #12131A;
+    --card-color: #1C1F2A;
+    --primary-text: #F2F2F7;
+    --secondary-text: #B4B7C9;
+}
+
+
+.light{
+    --background-color: #FFFFFF;
+    --card-color: #EEEEEE;
+    --primary-text: #12131A;
+    --secondary-text: #555555;
+}
